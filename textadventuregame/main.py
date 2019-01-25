@@ -6,7 +6,6 @@ display = np.zeros((housedimentions[0], housedimentions[1], 5), dtype=np.int64)
 # display = [[[0 for col in range(housedimentions[0])]for row in range(housedimentions[1])] for x in range(5)]
 
 
-
 houselines = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 textlines = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
