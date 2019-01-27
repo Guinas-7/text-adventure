@@ -22,6 +22,7 @@ enemies = {"spider1":[[20 , 5 , 15],"armor"],
 def startfight(enemie):
     variables.playerpossition
     while True:
+        displayenemiestats(enemie)
         textlines[housedimentions[0] - 1] = "Do you want to start a fight with " + str(enemie) + variables.playerpossition + variables.playerlastpossition
         printscreen()
         playerinput = readinput()
@@ -46,7 +47,23 @@ def fightmain(enemie):
         printscreen()
         playerinput = readinput()
         if playerinput == enemie:
-            enemies[rooms[variables.playerpossition][0][0]][0] = 0
+            enemies[enemie][0][0] = 0
             return True
         else:
             return False
+
+
+def displayenemiestats(enemie):
+    textlines[11] = "life: " + str(enemies[enemie][0][0])
+    return
+
+
+def displaymessage():
+
+    return
+
+
+def fightoptionsmenu():
+
+    return
+

@@ -21,8 +21,10 @@ west = ["west", "left"]
 back = ["back", "previous", "cancel"]
 
 playerstats = {"hp" : 1000,
-               "str": 10,
-               "spd": 10
+               "dmg": 1,
+               "mag": 1,
+               "def": 1,
+               "spd": 1
                }
 
 
