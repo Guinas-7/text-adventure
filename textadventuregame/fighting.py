@@ -1,4 +1,7 @@
 from text import *
+import variables
+
+
 
 weapons = ["sword", "axe", "dagger", "wand", "staff"]
 armor = ["leather", "copper", "iron"]
@@ -15,22 +18,27 @@ enemies = {"spider1":[[20 , 5 , 15],"armor"],
            }
 
 
+# fight or escape?
 def startfight(enemie):
+    variables.playerpossition
     while True:
-        textlines[housedimentions[0] - 1] = "Do you want to start a fight with " + str(enemie) + playerpossition + playerlastpossition
+        textlines[housedimentions[0] - 1] = "Do you want to start a fight with " + str(enemie) + variables.playerpossition + variables.playerlastpossition
         printscreen()
         playerinput = readinput()
         if playerinput in positiveanswer:
             clearquestion()
-            fightmain(enemie)
-            return playerpossition
+            if fightmain(enemie):
+                return variables.playerpossition
+            else:
+                return variables.startpossition
         elif playerinput in negativeanswer:
             clearquestion()
-            return playerlastpossition
+            return variables.playerlastpossition
         else:
             textlines[housedimentions[0] - 2] = playerinput + " is not a valid option"
 
 
+# main fight cicle
 def fightmain(enemie):
     global enemies
     while True:
@@ -38,7 +46,7 @@ def fightmain(enemie):
         printscreen()
         playerinput = readinput()
         if playerinput == enemie:
-            enemies[rooms[playerpossition][0][0]][0][0] = 0
-            return
+            enemies[rooms[variables.playerpossition][0][0]][0] = 0
+            return True
         else:
-            textlines[housedimentions[0] - 2] = playerinput + " is not a valid option"
+            return False

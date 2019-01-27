@@ -1,7 +1,8 @@
 from map import *
 
-
+# text to display
 textlines = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+# predefined text for each room
 roomtext = {"r1" : ["teste", "ola", "khac", "fsbgdhbdfb", "dfgbdhfhfgbsfvdsfbvdsfb", "dsbvd", "sdvbdvbsfvsdfvsdv"],
             "r2" : ["nope", "", "", "", "", "", ""],
             "r3" : ["", "", "", "", "", "", ""],
@@ -31,6 +32,7 @@ roomtext = {"r1" : ["teste", "ola", "khac", "fsbgdhbdfb", "dfgbdhfhfgbsfvdsfbvds
             }
 
 
+# gives the option to exit the game at any time
 def readinput():
     i = input().lower()
     if i == "exit":
@@ -39,11 +41,13 @@ def readinput():
         return i
 
 
+# gives a new screen by pushing all text up
 def newscreen():
     print("\n" * spacebetweenscreens)
     return
 
 
+# clear description of room
 def clearscreen():
     clearline(4)
     clearline(5)
@@ -54,15 +58,18 @@ def clearscreen():
     clearline(10)
 
 
+# clear an individual line
 def clearline(linenumber):
     textlines[linenumber] = ""
 
 
+# clear bottom 2 lines (the question, and the wrong input message)
 def clearquestion():
     clearline(housedimentions[0] - 1)
     clearline(housedimentions[0] - 2)
 
 
+# clear the main menu
 def clearoptions():
     clearline(11)
     clearline(12)
@@ -71,6 +78,7 @@ def clearoptions():
     clearline(15)
 
 
+# clear the secondary menu
 def clearextra():
     clearline(16)
     clearline(17)
@@ -79,6 +87,7 @@ def clearextra():
     clearline(20)
 
 
+# print the entire screen
 def printscreen():
     newscreen()
     i = 0
@@ -87,6 +96,7 @@ def printscreen():
         i += 1
 
 
+# update description of room
 def updateroomtext(room):
     i = 0
     while i < spacefordescription:

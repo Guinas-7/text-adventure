@@ -1,15 +1,17 @@
 from interactions import *
-global playerpossition
-updateroom(playerpossition)
-updateroomlines(playerpossition)
-updateroomtext(playerpossition)
+import variables
+variables.playerpossition = variables.startpossition
+
+global textlines
 updateplayerstats()
 
+# main cycle
 while True:
-    playerpossition = choseoption()
-    updateroom(playerpossition)
-    updateroomlines(playerpossition)
-    updateroomtext(playerpossition)
+    textlines[1] = "player pos " + variables.playerpossition + "     last pos " + variables.playerlastpossition
+    updateroom(variables.playerpossition)
+    updateroomlines(variables.playerpossition)
+    updateroomtext(variables.playerpossition)
+    variables.playerpossition = choseoption()
     clearextra()
     clearoptions()
 

@@ -1,9 +1,9 @@
-from vars import *
+from variables import *
 import numpy as np
 
 
 # display uses a 3d matrix to store five values into each coordinate of the map which after is translated to a symbol
-#
+
 display = np.zeros((housedimentions[0], housedimentions[1], 5), dtype=np.int64)
 # display = [[[0 for col in range(housedimentions[0])]for row in range(housedimentions[1])] for x in range(5)]
 
@@ -16,7 +16,7 @@ rooms = {"r1":  [[""]       , [[0  * charratio, 8 ], [3  * charratio, 16]], ["" 
          "r2":  [[""]       , [[4  * charratio, 12], [6  * charratio, 14]], ["h1" , ""   , ""   , ""   ], ["move", "loot", "manage", "extra"]],
          "r3":  [[""]       , [[4  * charratio, 9 ], [6  * charratio, 11]], [""   , ""   , "h1" , ""   ], ["move", "loot", "manage", "extra"]],
          "r4":  [["spider1"], [[7  * charratio, 10], [10 * charratio, 13]], ["h2" , ""   , "r8" , "h1" ], ["move", ""    , "manage", "extra"]],
-         "r5":  [[""]       , [[9  * charratio, 5 ], [12 * charratio, 9 ]], [""   , ""   , "h2" , ""   ], ["move", "loot", "manage", "extra"]],
+         "r5":  [[""]       , [[9  * charratio, 5 ], [12 * charratio, 9 ]], [""   , ""   , ""   , "h2" ], ["move", "loot", "manage", "extra"]],
          "r6":  [["blob1"]  , [[6  * charratio, 3 ], [8  * charratio, 8 ]], ["r7" , "h2" , ""   , ""   ], ["move", ""    , "manage", "extra"]],
          "r7":  [[""]       , [[7  * charratio, 1 ], [10 * charratio, 3 ]], [""   , ""   , "r6" , ""   ], ["move", "loot", "manage", "extra"]],
          "r8":  [[""]       , [[9  * charratio, 13], [11 * charratio, 17]], ["r4" , ""   , "r9" , ""   ], ["move", "loot", "manage", "extra"]],
@@ -128,6 +128,7 @@ def codetranslator(activecode):
             return symbol
 
 
+# update house lines that belong tho the room, but not the rest
 def updateroomlines(room):
     i = rooms[room][1][0][1]
     while i <= rooms[room][1][1][1]:

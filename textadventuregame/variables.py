@@ -1,7 +1,9 @@
+startpossition = "r2"
+
+playerpossition = ""
+playerlastpossition = ""
 
 
-playerpossition = "h1"
-playerlastpossition = "r1"
 charratio = 3
 housedimentions = [25, 37*charratio]
 maxLength = 80
@@ -22,3 +24,5 @@ playerstats = {"hp" : 1000,
                "str": 10,
                "spd": 10
                }
+
+
