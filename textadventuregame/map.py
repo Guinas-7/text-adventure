@@ -1,26 +1,12 @@
+from vars import *
 import numpy as np
-playerpossition = "r1"
-charratio = 3
-housedimentions = [25, 37*charratio]
-maxLength = 80
+
 
 # display uses a 3d matrix to store five values into each coordinate of the map which after is translated to a symbol
 #
 display = np.zeros((housedimentions[0], housedimentions[1], 5), dtype=np.int64)
 # display = [[[0 for col in range(housedimentions[0])]for row in range(housedimentions[1])] for x in range(5)]
 
-
-#enemies stats:[HP,DMG,SPD]
-enemies = {"spider1":[[20 , 5 , 15]],
-           "spider2":[[150, 25, 25]],
-           "blob1"  :[[35 , 7 , 5 ]],
-           "blob2"  :[[250, 35, 15]],
-           "plant1" :[[65 , 17, 7 ]],
-           "zombie1":[[90 , 20, 2 ]],
-           "dragon" :[[999, 50, 20]],
-
-
-}
 
 houselines = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 

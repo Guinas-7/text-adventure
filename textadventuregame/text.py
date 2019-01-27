@@ -1,11 +1,11 @@
 from map import *
-spacefortext = 7
+
 
 textlines = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 roomtext = {"r1" : ["teste", "ola", "khac", "fsbgdhbdfb", "dfgbdhfhfgbsfvdsfbvdsfb", "dsbvd", "sdvbdvbsfvsdfvsdv"],
             "r2" : ["nope", "", "", "", "", "", ""],
             "r3" : ["", "", "", "", "", "", ""],
-            "r4" : ["", "", "", "", "", "", ""],
+            "r4" : ["", "oioioioioioioioi", "", "", "", "", ""],
             "r5" : ["", "", "", "", "", "", ""],
             "r6" : ["", "", "", "", "", "", ""],
             "r7" : ["", "", "", "", "", "", ""],
@@ -31,8 +31,16 @@ roomtext = {"r1" : ["teste", "ola", "khac", "fsbgdhbdfb", "dfgbdhfhfgbsfvdsfbvds
             }
 
 
+def readinput():
+    i = input().lower()
+    if i == "exit":
+        exit()
+    else:
+        return i
+
+
 def newscreen():
-    print("\n" * 4)
+    print("\n" * spacebetweenscreens)
     return
 
 
@@ -81,6 +89,11 @@ def printscreen():
 
 def updateroomtext(room):
     i = 0
-    while i < spacefortext:
+    while i < spacefordescription:
         textlines[i+4] = roomtext[room][i]
         i = i+1
+
+
+def updateplayerstats():
+    textlines[0] = str(playerstats["hp"])
+    textlines[2] = "Str: " + str(playerstats["str"]) + "  Spd: " + str(playerstats["spd"])
