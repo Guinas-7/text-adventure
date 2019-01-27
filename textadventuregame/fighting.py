@@ -1,8 +1,6 @@
 from text import *
 import variables
 
-
-
 weapons = ["sword", "axe", "dagger", "wand", "staff"]
 armor = ["leather", "copper", "iron"]
 potion = ["hp", "str", "spd"]
@@ -41,16 +39,13 @@ def startfight(enemie):
 
 # main fight cicle
 def fightmain(enemie):
-    global enemies
     while True:
-        textlines[housedimentions[0] - 1] = "type the name of the enemie"
-        printscreen()
-        playerinput = readinput()
-        if playerinput == enemie:
-            enemies[enemie][0][0] = 0
+        if enemies[enemie][0][0] <= 0:
             return True
-        else:
+        elif playerstats["hp"] <= 0:
             return False
+        else:
+            fightoptionsmenu()
 
 
 def displayenemiestats(enemie):
@@ -64,6 +59,25 @@ def displaymessage():
 
 
 def fightoptionsmenu():
+    global enemies
+    textlines[14] = "MENU:"
+    textlines[15] = "* Attack"
+    textlines[16] = "* Item"
+    textlines[17] = ""
+    textlines[18] = "* Run"
+    while True:
+        textlines[housedimentions[0] - 1] = "What do you want to do?"
+        printscreen()
+        playerinput = readinput()
+        if playerinput == "attack":
+            atackmenu()
+            return
+        else:
+            textlines[housedimentions[0] - 2] = playerinput + " is not a valid option"
 
+
+def atackmenu():
+    textlines[19] = "Attack:"
+    textlines[20] = "* Swing Sword"
+    textlines[21] = "* Fireball"
     return
-
