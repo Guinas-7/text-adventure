@@ -3,38 +3,55 @@ playerpossition = "r1"
 charratio = 3
 housedimentions = [25, 37*charratio]
 maxLength = 80
+
+# display uses a 3d matrix to store five values into each coordinate of the map which after is translated to a symbol
+#
 display = np.zeros((housedimentions[0], housedimentions[1], 5), dtype=np.int64)
 # display = [[[0 for col in range(housedimentions[0])]for row in range(housedimentions[1])] for x in range(5)]
 
 
-houselines = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",""]
+#enemies stats:[HP,DMG,SPD]
+enemies = {"spider1":[[20 , 5 , 15]],
+           "spider2":[[150, 25, 25]],
+           "blob1"  :[[35 , 7 , 5 ]],
+           "blob2"  :[[250, 35, 15]],
+           "plant1" :[[65 , 17, 7 ]],
+           "zombie1":[[90 , 20, 2 ]],
+           "dragon" :[[999, 50, 20]],
 
-rooms = {"r1": [True, [[0*charratio, 8], [3*charratio, 16]],["","h1","",""]],
-         "r2": [False, [[4*charratio, 12], [6*charratio, 14]],["h1","","",""]],
-         "r3": [False, [[4*charratio, 9], [6*charratio, 11]],["","","h1",""]],
-         "r4": [False, [[7*charratio, 10], [10*charratio, 13]],["h2","","r8","h1"]],
-         "r5": [False, [[9*charratio, 5], [12*charratio, 9]],["","","h2",""]],
-         "r6": [False, [[6*charratio, 3], [8*charratio, 8]],["r7","h2","",""]],
-         "r7": [False, [[7*charratio, 1], [10*charratio, 3]],["","","r6",""]],
-         "r8": [False, [[9*charratio, 13], [11*charratio, 17]],["r4","","r9",""]],
-         "r9": [False, [[10*charratio, 17], [12*charratio, 19]],["r8","h4","r10",""]],
-         "r10": [False, [[6*charratio, 19], [11*charratio, 24]],["r9","","","r11"]],
-         "r11": [False, [[1*charratio, 17], [6*charratio, 20]],["","r10","h3",""]],
-         "r12": [False, [[2*charratio, 22], [4*charratio, 24]],["h3","","",""]],
-         "r13": [False, [[14*charratio, 17], [18*charratio, 21]],["h5","","","h4"]],
-         "r14": [False, [[15*charratio, 14], [18*charratio, 16]],["","","","h5"]],
-         "r15": [False, [[14*charratio, 8], [18*charratio, 13]],["h6","h7","h5",""]],
-         "r16": [False, [[18*charratio, 6], [20*charratio, 10]],["r17","","",""]],
-         "r17": [False, [[18*charratio, 3], [21*charratio, 6]],["","","r16","h6"]],
-         "r18": [False, [[14*charratio, 2], [17*charratio, 7]],["","h6","",""]],
-         "r19": [False, [[21*charratio, 9], [25*charratio, 13]],["","","","h7"]],
-         "h1": [False, [[3*charratio, 11], [7*charratio, 12]],["r3","r4","r2","r1"]],
-         "h2": [False, [[8*charratio, 7], [9*charratio, 10]],["","r5","r4","r6"]],
-         "h3": [False, [[2*charratio, 20], [3*charratio, 22]],["r11","","r12",""]],
-         "h4": [False, [[12*charratio, 18], [14*charratio, 19]],["","r13","","r9"]],
-         "h5": [False, [[14*charratio, 13], [15*charratio, 17]],["r15","r14","r13",""]],
-         "h6": [False, [[17*charratio, 5], [18*charratio, 8]],["","r17","r15","r18"]],
-         "h7": [False, [[18*charratio, 11], [21*charratio, 12]],["","r19","","r15"]],
+
+}
+
+houselines = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+
+# Rooms Information
+# Layout - [enemies],[coordinates of 2 corners],[connections to other rooms],[available options],[items]
+rooms = {"r1":  [[""]       , [[0  * charratio, 8 ], [3  * charratio, 16]], [""   , "h1" , ""   , ""   ], ["move", "loot", "manage", "extra"]],
+         "r2":  [[""]       , [[4  * charratio, 12], [6  * charratio, 14]], ["h1" , ""   , ""   , ""   ], ["move", "loot", "manage", "extra"]],
+         "r3":  [[""]       , [[4  * charratio, 9 ], [6  * charratio, 11]], [""   , ""   , "h1" , ""   ], ["move", "loot", "manage", "extra"]],
+         "r4":  [["spider1"], [[7  * charratio, 10], [10 * charratio, 13]], ["h2" , ""   , "r8" , "h1" ], ["move", ""    , "manage", "extra"]],
+         "r5":  [[""]       , [[9  * charratio, 5 ], [12 * charratio, 9 ]], [""   , ""   , "h2" , ""   ], ["move", "loot", "manage", "extra"]],
+         "r6":  [["blob1"]  , [[6  * charratio, 3 ], [8  * charratio, 8 ]], ["r7" , "h2" , ""   , ""   ], ["move", ""    , "manage", "extra"]],
+         "r7":  [[""]       , [[7  * charratio, 1 ], [10 * charratio, 3 ]], [""   , ""   , "r6" , ""   ], ["move", "loot", "manage", "extra"]],
+         "r8":  [[""]       , [[9  * charratio, 13], [11 * charratio, 17]], ["r4" , ""   , "r9" , ""   ], ["move", "loot", "manage", "extra"]],
+         "r9":  [[""]       , [[10 * charratio, 17], [12 * charratio, 19]], ["r8" , "h4" , "r10", ""   ], ["move", "loot", "manage", "extra"]],
+         "r10": [["zombie1"], [[6  * charratio, 19], [11 * charratio, 24]], ["r9" , ""   , ""   , "r11"], ["move", ""    , "manage", "extra"]],
+         "r11": [[""]       , [[1  * charratio, 17], [6  * charratio, 20]], [""   , "r10", "h3" , ""   ], ["move", "loot", "manage", "extra"]],
+         "r12": [["plant1"] , [[2  * charratio, 22], [4  * charratio, 24]], ["h3" , ""   , ""   , ""   ], ["move", ""    , "manage", "extra"]],
+         "r13": [[""]       , [[14 * charratio, 17], [18 * charratio, 21]], ["h5" , ""   , ""   , "h4" ], ["move", "loot", "manage", "extra"]],
+         "r14": [["spider2"], [[15 * charratio, 14], [18 * charratio, 16]], [""   , ""   , ""   , "h5" ], ["move", ""    , "manage", "extra"]],
+         "r15": [[""]       , [[14 * charratio, 8 ], [18 * charratio, 13]], ["h6" , "h7" , "h5" , ""   ], ["move", "loot", "manage", "extra"]],
+         "r16": [[""]       , [[18 * charratio, 6 ], [20 * charratio, 10]], ["r17", ""   , ""   , ""   ], ["move", "loot", "manage", "extra"]],
+         "r17": [["blob2"]  , [[18 * charratio, 3 ], [21 * charratio, 6 ]], [""   , ""   , "r16", "h6" ], ["move", ""    , "manage", "extra"]],
+         "r18": [[""]       , [[14 * charratio, 2 ], [17 * charratio, 7 ]], [""   , "h6" , ""   , ""   ], ["move", "loot", "manage", "extra"]],
+         "r19": [["dragon"] , [[21 * charratio, 9 ], [25 * charratio, 13]], [""   , ""   , ""   , "h7" ], ["move", ""    , "manage", "extra"]],
+         "h1":  [[""]       , [[3  * charratio, 11], [7  * charratio, 12]], ["r3" , "r4" , "r2" , "r1" ], ["move", ""    , "manage", "extra"]],
+         "h2":  [[""]       , [[8  * charratio, 7 ], [9  * charratio, 10]], [""   , "r5" , "r4" , "r6" ], ["move", ""    , "manage", "extra"]],
+         "h3":  [[""]       , [[2  * charratio, 20], [3  * charratio, 22]], ["r11", ""   , "r12", ""   ], ["move", ""    , "manage", "extra"]],
+         "h4":  [[""]       , [[12 * charratio, 18], [14 * charratio, 19]], [""   , "r13", ""   , "r9" ], ["move", ""    , "manage", "extra"]],
+         "h5":  [[""]       , [[14 * charratio, 13], [15 * charratio, 17]], ["r15", "r14", "r13", ""   ], ["move", ""    , "manage", "extra"]],
+         "h6":  [[""]       , [[17 * charratio, 5 ], [18 * charratio, 8 ]], [""   , "r17", "r15", "r18"], ["move", ""    , "manage", "extra"]],
+         "h7":  [[""]       , [[18 * charratio, 11], [21 * charratio, 12]], [""   , "r19", ""   , "r15"], ["move", ""    , "manage", "extra"]],
         }
 
 

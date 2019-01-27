@@ -10,5 +10,6 @@ while True:
     updateroom(playerpossition)
     updateroomlines(playerpossition)
     updateroomtext(playerpossition)
+    clearextra()
 
 
