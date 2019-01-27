@@ -1,6 +1,6 @@
 from text import *
 from fighting import *
-playerpossition = "r1"
+
 inventory = []
 
 positiveanswer = ["yes", "sure"]
@@ -27,13 +27,16 @@ def readinput():
 
 def choseoption():
     textlines[11] = "you can do all of these:"
+    textlines[12] = "move"
+    textlines[13] = "explore"
+    textlines[14] = "manage"
+    textlines[15] = "extra"
     while True:
         textlines[housedimentions[0] - 1] = "what do you want to do?"
         printscreen()
         playerinput = readinput()
         if playerinput == roomoptions[0]:
-            movemenu()
-            return
+            return directionchoice()
         elif playerinput == roomoptions[1]:
             exploremenu()
             return
@@ -46,9 +49,6 @@ def choseoption():
         else:
             textlines[housedimentions[0] - 2] = playerinput + " is not a valid option"
 
-
-def movemenu():
-    return
 
 
 def exploremenu():
@@ -65,40 +65,38 @@ def blankmenu():
 
 def directionchoice():
     global playerpossition
-    if playerpossition[0] == "h":
-        tipo = halls
-    elif playerpossition[0] == "r":
-        tipo = rooms
-    else:
-        return
-
+    textlines[16] = "you can move in these directions:"
+    textlines[17] = "north"
+    textlines[18] = "south"
+    textlines[19] = "east"
+    textlines[20] = "west"
     while True:
         textlines[housedimentions[0]-1] = "which direction do you want to move in?"
         printscreen()
         playerinput = readinput()
-        if playerinput in north and tipo[playerpossition][2][0] != "":
+        if playerinput in north and rooms[playerpossition][2][0] != "":
             clearquestion()
-            playerpossition = tipo[playerpossition][2][0]
+            playerpossition = rooms[playerpossition][2][0]
             updateroom(playerpossition)
-            return 1
-        elif playerinput in east and tipo[playerpossition][2][1] != "":
+            return playerpossition
+        elif playerinput in east and rooms[playerpossition][2][1] != "":
             clearquestion()
-            playerpossition = tipo[playerpossition][2][1]
+            playerpossition = rooms[playerpossition][2][1]
             updateroom(playerpossition)
-            return 2
-        elif playerinput in south and tipo[playerpossition][2][2] != "":
+            return playerpossition
+        elif playerinput in south and rooms[playerpossition][2][2] != "":
             clearquestion()
-            playerpossition = tipo[playerpossition][2][2]
+            playerpossition = rooms[playerpossition][2][2]
             updateroom(playerpossition)
-            return 3
-        elif playerinput in west and tipo[playerpossition][2][3] != "":
+            return playerpossition
+        elif playerinput in west and rooms[playerpossition][2][3] != "":
             clearquestion()
-            playerpossition = tipo[playerpossition][2][3]
+            playerpossition = rooms[playerpossition][2][3]
             updateroom(playerpossition)
-            return 4
+            return playerpossition
         elif playerinput in back:
             clearquestion()
-            return 0
+            return
         else:
             textlines[housedimentions[0]-2] = playerinput + " is not a valid option"
 
@@ -131,5 +129,3 @@ def keepitem(item):
             return False
         else:
             textlines[housedimentions[0] - 2] = playerinput + " is not a valid option"
-
-

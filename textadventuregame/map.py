@@ -1,4 +1,5 @@
 import numpy as np
+playerpossition = "r1"
 charratio = 3
 housedimentions = [25, 37*charratio]
 maxLength = 80
@@ -26,16 +27,14 @@ rooms = {"r1": [True, [[0*charratio, 8], [3*charratio, 16]],["","h1","",""]],
          "r16": [False, [[18*charratio, 6], [20*charratio, 10]],["r17","","",""]],
          "r17": [False, [[18*charratio, 3], [21*charratio, 6]],["","","r16","h6"]],
          "r18": [False, [[14*charratio, 2], [17*charratio, 7]],["","h6","",""]],
-         "r19": [False, [[21*charratio, 9], [25*charratio, 13]],["","","","h7"]]
-         }
-
-halls = {"h1": [False, [[3*charratio, 11], [7*charratio, 12]],["r3","r4","r2","r1"]],
+         "r19": [False, [[21*charratio, 9], [25*charratio, 13]],["","","","h7"]],
+         "h1": [False, [[3*charratio, 11], [7*charratio, 12]],["r3","r4","r2","r1"]],
          "h2": [False, [[8*charratio, 7], [9*charratio, 10]],["","r5","r4","r6"]],
          "h3": [False, [[2*charratio, 20], [3*charratio, 22]],["r11","","r12",""]],
          "h4": [False, [[12*charratio, 18], [14*charratio, 19]],["","r13","","r9"]],
          "h5": [False, [[14*charratio, 13], [15*charratio, 17]],["r15","r14","r13",""]],
          "h6": [False, [[17*charratio, 5], [18*charratio, 8]],["","r17","r15","r18"]],
-         "h7": [False, [[18*charratio, 11], [21*charratio, 12]],["","r19","","r15"]]
+         "h7": [False, [[18*charratio, 11], [21*charratio, 12]],["","r19","","r15"]],
         }
 
 
@@ -75,43 +74,37 @@ housesymbolcode = {" ": "[[0 0 0 0 0]]",
 
 # update symbol table
 def updateroom(room):
-    if room[0] == "h":
-        tipo = halls
-    elif room[0] == "r":
-        tipo = rooms
-    else:
-        return
     global display
     # X and Y of top-left corner of room
-    ix = tipo[room][1][0][0]
-    iy = tipo[room][1][0][1]
+    ix = rooms[room][1][0][0]
+    iy = rooms[room][1][0][1]
     # defining top-left corner of room
-    display[tipo[room][1][0][1], tipo[room][1][0][0], 1] = 1
-    display[tipo[room][1][0][1], tipo[room][1][0][0], 2] = 1
+    display[rooms[room][1][0][1], rooms[room][1][0][0], 1] = 1
+    display[rooms[room][1][0][1], rooms[room][1][0][0], 2] = 1
     # defining top-right corner of room
-    display[tipo[room][1][0][1], tipo[room][1][1][0], 1] = 1
-    display[tipo[room][1][0][1], tipo[room][1][1][0], 3] = 1
+    display[rooms[room][1][0][1], rooms[room][1][1][0], 1] = 1
+    display[rooms[room][1][0][1], rooms[room][1][1][0], 3] = 1
     # defining bottom-left corner of room
-    display[tipo[room][1][1][1], tipo[room][1][0][0], 0] = 1
-    display[tipo[room][1][1][1], tipo[room][1][0][0], 2] = 1
+    display[rooms[room][1][1][1], rooms[room][1][0][0], 0] = 1
+    display[rooms[room][1][1][1], rooms[room][1][0][0], 2] = 1
     # defining bottom-right corner of room
-    display[tipo[room][1][1][1], tipo[room][1][1][0], 0] = 1
-    display[tipo[room][1][1][1], tipo[room][1][1][0], 3] = 1
+    display[rooms[room][1][1][1], rooms[room][1][1][0], 0] = 1
+    display[rooms[room][1][1][1], rooms[room][1][1][0], 3] = 1
 
     # defining top and bottom wall of room
-    while ix + 1 < (tipo[room][1][1][0]):
-        display[tipo[room][1][0][1], ix+1, 2] = 1
-        display[tipo[room][1][0][1], ix+1, 3] = 1
-        display[tipo[room][1][1][1], ix+1, 2] = 1
-        display[tipo[room][1][1][1], ix+1, 3] = 1
+    while ix + 1 < (rooms[room][1][1][0]):
+        display[rooms[room][1][0][1], ix+1, 2] = 1
+        display[rooms[room][1][0][1], ix+1, 3] = 1
+        display[rooms[room][1][1][1], ix+1, 2] = 1
+        display[rooms[room][1][1][1], ix+1, 3] = 1
         ix += 1
 
     # defining left and right wall of room
-    while iy+1 < (tipo[room][1][1][1]):
-        display[iy+1, tipo[room][1][0][0], 0] = 1
-        display[iy+1, tipo[room][1][0][0], 1] = 1
-        display[iy+1, tipo[room][1][1][0], 0] = 1
-        display[iy+1, tipo[room][1][1][0], 1] = 1
+    while iy+1 < (rooms[room][1][1][1]):
+        display[iy+1, rooms[room][1][0][0], 0] = 1
+        display[iy+1, rooms[room][1][0][0], 1] = 1
+        display[iy+1, rooms[room][1][1][0], 0] = 1
+        display[iy+1, rooms[room][1][1][0], 1] = 1
         iy += 1
 
 
@@ -131,14 +124,9 @@ def codetranslator(activecode):
 
             return symbol
 
+
 def updateroomlines(room):
-    if room[0] == "h":
-        tipo = halls
-    elif room[0] == "r":
-        tipo = rooms
-    else:
-        return
-    i = tipo[room][1][0][1]
-    while i <= tipo[room][1][1][1]:
+    i = rooms[room][1][0][1]
+    while i <= rooms[room][1][1][1]:
         updatehouseline(i)
         i = i + 1

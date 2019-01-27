@@ -1,10 +1,14 @@
 from interactions import *
-
-updateroomtext("r1")
+global playerpossition
+updateroom(playerpossition)
+updateroomlines(playerpossition)
+updateroomtext(playerpossition)
 
 while True:
+    print(playerpossition)
+    playerpossition = choseoption()
     updateroom(playerpossition)
     updateroomlines(playerpossition)
-    directionchoice()
+    updateroomtext(playerpossition)
 
 
