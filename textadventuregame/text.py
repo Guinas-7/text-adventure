@@ -85,6 +85,14 @@ def clearextra():
     clearline(18)
     clearline(19)
     clearline(20)
+    clearline(21)
+
+
+# clear the secondary figth menu
+def clearsecondaryfightmenu():
+    clearline(19)
+    clearline(20)
+    clearline(21)
 
 
 # print the entire screen
