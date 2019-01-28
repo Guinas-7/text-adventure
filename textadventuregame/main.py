@@ -7,7 +7,7 @@ updateplayerstats()
 
 # main cycle
 while True:
-    textlines[1] = "player pos " + variables.playerpossition + "     last pos " + variables.playerlastpossition
+    #textlines[1] = "player pos " + variables.playerpossition + "     last pos " + variables.playerlastpossition
     updateroom(variables.playerpossition)
     updateroomlines(variables.playerpossition)
     updateroomtext(variables.playerpossition)

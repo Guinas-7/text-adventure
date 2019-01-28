@@ -2,8 +2,17 @@ from fighting import *
 import variables
 
 
-roomoptions = ["move", "explore", "manage", "extra"]
+roomoptions = ["move", "loot", "manage", "extra"]
 
+itemlist = {"wood sword"      :["dmg",2],
+             "staff"          :["mag",4],
+             "shoe"           :["spd",10],
+             "chestplate"     :["def",5],
+             "iron sword"     :["dmg",8],
+             "shield"         :["def",7],
+             "master sword"   :["dmg",15],
+             "ability scroll" :["exp",1],
+             }
 
 
 # main menu
@@ -18,20 +27,20 @@ def choseoption():
     textlines[14] = " * " + rooms[variables.playerpossition][3][2]
     textlines[15] = " * " + rooms[variables.playerpossition][3][3]
     while True:
-        textlines[housedimentions[0] - 1] = "what do you want to do? " + variables.playerpossition + variables.playerlastpossition
+        textlines[housedimentions[0] - 1] = "what do you want to do?"
         printscreen()
         playerinput = readinput()
         if playerinput == roomoptions[0]:
             return directionchoice()
         elif playerinput == roomoptions[1]:
-            exploremenu()
-            return
+            lootmenu()
+            return variables.playerpossition
         elif playerinput == roomoptions[2]:
             managemenu()
-            return
+            return variables.playerpossition
         elif playerinput == roomoptions[3]:
             blankmenu()
-            return
+            return variables.playerpossition
         else:
             textlines[housedimentions[0] - 2] = playerinput + " is not a valid option"
 
@@ -99,7 +108,11 @@ def updateplayerlastpossition(possition):
 
 
 # loot secondary menu
-def exploremenu():
+def lootmenu():
+    item = rooms[variables.playerpossition][4][0]
+    rooms[variables.playerpossition][3][1] = ""
+    print(item)
+
     return
 
 
