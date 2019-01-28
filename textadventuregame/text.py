@@ -114,5 +114,5 @@ def updateroomtext(room):
 
 
 def updateplayerstats():
-    textlines[0] = str(playerstats["hp"])
+    textlines[0] = "HP: " + str(playerstats["hp"])
     textlines[2] = "Dmg: " + str(playerstats["dmg"]) + "  Mag: " + str(playerstats["mag"]) + "  Def: " + str(playerstats["def"]) + "  Spd: " + str(playerstats["spd"])
