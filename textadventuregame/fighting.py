@@ -1,5 +1,6 @@
 from text import *
 import variables
+import random
 
 playerattacks = ["swing", "fireball", "pass", "pass"]
 
@@ -18,18 +19,18 @@ enemies = {"spider1": [[20 , 10, 4 ], ["bite"          ,"web trow" ,"pass"      
            "zombie1": [[90 , 20, 2 ], ["bite"          ,"scratch"  ,"pass"        ]],
            "dragon" : [[999, 50, 20], ["bite"          ,"fireball" ,"fire tornado"]]
            }
-
-enemyattacks = {"pass"     : [0],
-                "bite"   : [2],
-                "web trow"   : [1],
+# name of attack and damagemultiplierr
+enemyattacks = {"pass"            : [0],
+                "bite"            : [2],
+                "web trow"        : [1],
                 "small spiders"   : [1.6],
-                "swallow"   : [2],
-                "spit"   : [1.4],
-                "scratch"   : [1.3],
-                "fireball"   : [2.5],
-                "fire tornado"   : [3],
-                "whip"   : [1.5],
-                "squeeze"   : [2]
+                "swallow"         : [2],
+                "spit"            : [1.4],
+                "scratch"         : [1.3],
+                "fireball"        : [2.5],
+                "fire tornado"    : [3],
+                "whip"            : [1.5],
+                "squeeze"         : [2]
                 }
 
 # list of attacks - name of attack:[category,damage,wait time]

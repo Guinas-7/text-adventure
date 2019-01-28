@@ -2,6 +2,7 @@ from map import *
 
 # text to display
 textlines = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+
 # predefined text for each room
 roomtext = {"r1" : ["You found yourself in a dark and cold room, when your eyes start to get ", "used to the darkness you see something shiny, you approach, it is a", "sword, not the greatest and it is rusty, you look closer and you notice", "an engraving on the pommel of the sword where you can read:", "(It's dangerous to go alone, Take this.)", "", ""],
             "r2" : ["The smell of animals is very strong here, the room is full of hair all", "over the floor, you can see a big pile of hay and straw, a closet, at", "least what's left of it and a lot of tools spread out in a corner.", "", "", "", ""],
