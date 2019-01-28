@@ -1,5 +1,6 @@
 from fighting import *
 import variables
+import map
 
 
 roomoptions = ["move", "loot", "manage", "extra"]
@@ -110,12 +111,30 @@ def updateplayerlastpossition(possition):
 # loot secondary menu
 def lootmenu():
     item = rooms[variables.playerpossition][4][0]
-    rooms[variables.playerpossition][3][1] = ""
+    map.rooms[variables.playerpossition][3][1] = ""
+    if item == "ability scroll":
+        addability("frenzy")
+    else:
+        additem(item)
     print(item)
 
     return
 
 
+def additem(item):
+    variables.playerstats[itemlist[item][0]] = variables.playerstats[itemlist[item][0]] + itemlist[item][1]
+    updateplayerstats()
+    textlines[housedimentions[0] - 1] = "You fond a " + item +", your " + itemlist[item][0] + " increased by " + str(itemlist[item][1]) + ". Press enter to continue"
+    printscreen()
+    readinput()
+
+
+def addability(ability):
+    playerattacks[2] = ability
+    textlines[housedimentions[0] - 1] = "You fond an ability scroll, now you can use " + ability + " in combat. Press enter to continue"
+    printscreen()
+    readinput()
+    return
 # management secondary menu
 def managemenu():
     return

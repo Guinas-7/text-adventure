@@ -1,10 +1,6 @@
 from text import *
 import variables
 
-weapons = ["sword", "axe", "dagger", "wand", "staff"]
-armor = ["leather", "copper", "iron"]
-potion = ["hp", "str", "spd"]
-
 playerattacks = ["swing", "fireball", "pass", "pass"]
 
 potionlist = {"hp potion" :[2, 650],
@@ -26,10 +22,11 @@ enemyattacks = {"pass"     : [0],
                 "attack1"   : [2],
                 "attack2"   : [1]
                 }
-# list of attacks - name of attack:[category,damage]
-attacks = {"pass"     : ["dmg", 0],
-           "swing"    : ["dmg", 1.3],
-           "fireball" : ["mag", 1]
+# list of attacks - name of attack:[category,damage,wait time]
+attacks = {"pass"     : ["dmg", 0  ,0],
+           "swing"    : ["dmg", 1.3,1],
+           "fireball" : ["mag", 1.6,1],
+           "frenzy"   : ["dmg", 3  ,5]
            }
 
 
