@@ -3,13 +3,13 @@ startpossition = "h1"
 playerpossition = ""
 playerlastpossition = ""
 
-
+spacebetweenscreens = 20
 charratio = 3
 housedimentions = [25, 37*charratio]
 maxLength = 80
 
 spacefordescription = 7
-spacebetweenscreens = 10
+
 
 positiveanswer = ["yes", "sure"]
 negativeanswer = ["no", "nope"]

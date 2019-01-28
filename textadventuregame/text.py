@@ -3,10 +3,10 @@ from map import *
 # text to display
 textlines = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 # predefined text for each room
-roomtext = {"r1" : ["teste", "ola", "khac", "fsbgdhbdfb", "dfgbdhfhfgbsfvdsfbvdsfb", "dsbvd", "sdvbdvbsfvsdfvsdv"],
+roomtext = {"r1" : ["", "", "", "", "", "", ""],
             "r2" : ["nope", "", "", "", "", "", ""],
             "r3" : ["", "", "", "", "", "", ""],
-            "r4" : ["", "oioioioioioioioi", "", "", "", "", ""],
+            "r4" : ["This room is small and empty, the only thing here is a large", "spider's web, which covers one corner of the room from ceiling to floor.", "You start to feel a tingling in the leg, hundreds of spiders try to", "reach you and climb your legs, look up,", "a giant spider is hanging in the web ready to attack ...", "", ""],
             "r5" : ["", "", "", "", "", "", ""],
             "r6" : ["", "", "", "", "", "", ""],
             "r7" : ["", "", "", "", "", "", ""],
@@ -16,7 +16,7 @@ roomtext = {"r1" : ["teste", "ola", "khac", "fsbgdhbdfb", "dfgbdhfhfgbsfvdsfbvds
             "r11": ["", "", "", "", "", "", ""],
             "r12": ["", "", "", "", "", "", ""],
             "r13": ["", "", "", "", "", "", ""],
-            "r14": ["", "", "", "", "", "", ""],
+            "r14": ["This room is small and empty, the only thing here is a large", "spider's web, which covers one corner of the room from ceiling to floor.", "You start to feel a tingling in the leg, hundreds of spiders try to", "reach you and climb your legs, look up,", "a giant spider is hanging in the web ready to attack ...", "", ""],
             "r15": ["", "", "", "", "", "", ""],
             "r16": ["", "", "", "", "", "", ""],
             "r17": ["", "", "", "", "", "", ""],
