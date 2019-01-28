@@ -58,23 +58,32 @@ def startfight(enemy):
     enemymaxhp = enemies[enemy][0][0]
     while True:
         displayenemystats(enemy)
-        textlines[housedimentions[0] - 1] = "Do you want to start a fight with " + enemy
-        printscreen()
+        displayenemy(enemy)
+        textlines[housedimentions[0] - 1] = "Do you want to start a fight with " + enemy + "?"
+        printscreen(enemylines)
         playerinput = readinput()
         if playerinput in positiveanswer:
             saveplayerstats()
             clearquestion()
             if fightmain(enemy):
                 reverseplayerstats()
+                returntomap()
                 return variables.playerpossition
             else:
                 reverseplayerstats()
+                returntomap()
                 return variables.playerlastpossition
         elif playerinput in negativeanswer:
             clearquestion()
+            returntomap()
             return variables.playerlastpossition
         else:
-            textlines[housedimentions[0] - 2] = playerinput + " is not a valid option"
+            textlines[housedimentions[0] - 2] = playerinput + " is not a valid option."
+
+def displayenemy(enemy):
+
+    return
+
 
 
 # main fight cycle
@@ -92,13 +101,13 @@ def fightmain(enemy):
             if fightoptionsmenu(enemy):
                 displayenemystats(enemy)
                 if enemies[enemy][0][0] > 0:
-                    textlines[housedimentions[0] - 1] = "Press enter to continue"
-                    printscreen()
+                    textlines[housedimentions[0] - 1] = "Press enter to continue."
+                    printscreen(enemylines)
                     readinput()
                     enemyattack(enemy)
                 else:
-                    textlines[housedimentions[0] - 1] = "you killed " + enemy + " press enter to continue"
-                    printscreen()
+                    textlines[housedimentions[0] - 1] = "you killed " + enemy + ". Press enter to continue."
+                    printscreen(enemylines)
                     readinput()
                 updateplayerstats()
             else:
@@ -124,13 +133,13 @@ def displaymessage(category, attack, enemy, damage):
     textlines[12] = textlines[13]
     textlines[13] = textlines[14]
     if category == "attack":
-        textlines[14] = "► You attacked " + enemy + " with " + attack + " and done " + str(damage) + " damage to it."
+        textlines[14] = "> You attacked " + enemy + " with " + attack + " and done " + str(damage) + " damage to it."
     elif category == "damage":
-        textlines[14] = "◄ You were attacked by " + enemy + " with " + attack + " and received " + str(damage) + " damage."
+        textlines[14] = "< You were attacked by " + enemy + " with " + attack + " and received " + str(damage) + " damage."
     elif category == "failrun":
         textlines[14] = "You can not run, " + enemy + " is faster than you.   " + enemy + " speed:" + str(damage)+"."
     elif category == "potion":
-        textlines[14] = "▼ You took a " + attack + " potion and got" + str(damage) + attack + " points."
+        textlines[14] = "v You took a " + attack + " potion and got" + str(damage) + attack + " points."
     return
 
 
@@ -143,7 +152,7 @@ def fightoptionsmenu(enemy):
     while True:
         clearsecondaryfightmenu()
         textlines[housedimentions[0] - 1] = "What do you want to do?"
-        printscreen()
+        printscreen(enemylines)
         playerinput = readinput()
         if playerinput == "attack":
             clearquestion()
@@ -171,11 +180,11 @@ def itemmenu():
     textlines[21] = "* MAG Potion  " + str(potionlist["mag potion"][0]) + "  * DEF potion  " + str(potionlist["def potion"][0])
     while True:
         textlines[housedimentions[0] - 1] = "Which item do you want to use?"
-        printscreen()
+        printscreen(enemylines)
         playerinput = readinput()
         if playerinput in("hp", "hp potion"):
             if potionlist["hp potion"][0] <= 0:
-                textlines[housedimentions[0] - 2] = "You do not have enough HP potions "
+                textlines[housedimentions[0] - 2] = "You do not have enough HP potions."
             else:
                 potionlist["hp potion"][0] = potionlist["hp potion"][0] - 1
                 displaymessage("potion", "Health", "", potionlist["hp potion"][1])
@@ -185,7 +194,7 @@ def itemmenu():
             return True
         elif playerinput in("dmg", "dmg potion"):
             if potionlist["dmg potion"][0] <= 0:
-                textlines[housedimentions[0] - 2] = "You do not have enough DMG potions "
+                textlines[housedimentions[0] - 2] = "You do not have enough DMG potions."
             else:
                 potionlist["dmg potion"][0] = potionlist["dmg potion"][0] - 1
                 displaymessage("potion", "DMG", "", potionlist["dmg potion"][1])
@@ -193,7 +202,7 @@ def itemmenu():
             return True
         elif playerinput in("mag", "mag potion"):
             if potionlist["mag potion"][0] <= 0:
-                textlines[housedimentions[0] - 2] = "You do not have enough MAG potions "
+                textlines[housedimentions[0] - 2] = "You do not have enough MAG potions."
             else:
                 potionlist["mag potion"][0] = potionlist["mag potion"][0] - 1
                 displaymessage("potion", "MAG", "", potionlist["mag potion"][1])
@@ -201,7 +210,7 @@ def itemmenu():
             return True
         elif playerinput in("def", "def potion"):
             if potionlist["def potion"][0] <= 0:
-                textlines[housedimentions[0] - 2] = "You do not have enough DEF potions "
+                textlines[housedimentions[0] - 2] = "You do not have enough DEF potions."
             else:
                 potionlist["mag potion"][0] = potionlist["mag potion"][0] - 1
                 displaymessage("potion", "DEF", "", potionlist["def potion"][1])
@@ -210,7 +219,7 @@ def itemmenu():
         elif playerinput in ("cancel", "back"):
             return False
         else:
-            textlines[housedimentions[0] - 2] = playerinput + " is not an item you can use"
+            textlines[housedimentions[0] - 2] = playerinput + " is not an item you can use."
 
 
 def atackmenu(enemy):
@@ -218,8 +227,8 @@ def atackmenu(enemy):
     textlines[20] = "* " + playerattacks[0] + "".join([" " for x in range(1, 20-len(playerattacks[0]))]) + "* " + playerattacks[2]
     textlines[21] = "* " + playerattacks[1] + "".join([" " for x in range(1, 20-len(playerattacks[1]))]) + "* " + playerattacks[3]
     while True:
-        textlines[housedimentions[0] - 1] = "Choose an attack"
-        printscreen()
+        textlines[housedimentions[0] - 1] = "Choose an attack."
+        printscreen(enemylines)
         playerinput = readinput()
         if playerinput == playerattacks[0]:
             clearquestion()
@@ -238,7 +247,7 @@ def atackmenu(enemy):
             damageenemy(enemy, playerattacks[3])
             return
         else:
-            textlines[housedimentions[0] - 2] = "You do not have the " + playerinput + " attack"
+            textlines[housedimentions[0] - 2] = "You do not have the " + playerinput + " attack."
 
 
 def runmenu(enemy):

@@ -1,5 +1,5 @@
 
-startpossition = "r15"
+startpossition = "r1"
 
 playerpossition = ""
 playerlastpossition = "h1"
