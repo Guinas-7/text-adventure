@@ -3,25 +3,35 @@ import variables
 
 playerattacks = ["swing", "fireball", "pass", "pass"]
 
-potionlist = {"hp potion" :[2, 650],
-             "dmg potion":[1, 1],
+potionlist = {"hp potion" :[1, 650],
+             "dmg potion":[0, 1],
              "mag potion":[0, 1],
-             "def potion":[1, 1]
+             "def potion":[0, 1]
              }
 
-# enemies stats:[HP,DMG,SPD],drop
-enemies = {"spider1": [[20 , 5 , 4 ], ["attack1","attack2"]],
-           "spider2": [[150, 25, 25], ["attack1","attack2"]],
-           "blob1"  : [[35 , 7 , 5 ], ["attack1","attack2"]],
-           "blob2"  : [[250, 35, 15], ["attack1","attack2"]],
-           "plant1" : [[65 , 17, 7 ], ["attack1","attack2"]],
-           "zombie1": [[90 , 20, 2 ], ["attack1","attack2"]],
-           "dragon" : [[999, 50, 20], ["attack1","attack2"]]
+# enemies stats:[HP,DMG,SPD],attacks
+enemies = {"spider1": [[20 , 10, 4 ], ["bite"          ,"web trow" ,"pass"        ]],
+           "spider2": [[150, 25, 25], ["small spiders" ,"bite"     ,"pass"        ]],
+           "blob1"  : [[35 , 13, 5 ], ["swallow"       ,"spit"     ,"pass"        ]],
+           "blob2"  : [[250, 35, 15], ["spit"          ,"swallow " ,"pass"        ]],
+           "plant1" : [[65 , 17, 7 ], ["whip"          ,"squeeze"  ,"pass"        ]],
+           "zombie1": [[90 , 20, 2 ], ["bite"          ,"scratch"  ,"pass"        ]],
+           "dragon" : [[999, 50, 20], ["bite"          ,"fireball" ,"fire tornado"]]
            }
+
 enemyattacks = {"pass"     : [0],
-                "attack1"   : [2],
-                "attack2"   : [1]
+                "bite"   : [2],
+                "web trow"   : [1],
+                "small spiders"   : [1.6],
+                "swallow"   : [2],
+                "spit"   : [1.4],
+                "scratch"   : [1.3],
+                "fireball"   : [2.5],
+                "fire tornado"   : [3],
+                "whip"   : [1.5],
+                "squeeze"   : [2]
                 }
+
 # list of attacks - name of attack:[category,damage,wait time]
 attacks = {"pass"     : ["dmg", 0  ,0],
            "swing"    : ["dmg", 1.3,1],
@@ -58,7 +68,6 @@ def startfight(enemy):
     enemymaxhp = enemies[enemy][0][0]
     while True:
         displayenemystats(enemy)
-        displayenemy(enemy)
         textlines[housedimentions[0] - 1] = "Do you want to start a fight with " + enemy + "?"
         printscreen(enemylines[enemy])
         playerinput = readinput()
@@ -66,6 +75,10 @@ def startfight(enemy):
             saveplayerstats()
             clearquestion()
             if fightmain(enemy):
+                if enemy == "dragon":
+                    textlines[housedimentions[0] - 1] = "you killed the boss congratulations. write exit to finish game"
+                    printscreen(enemylines[enemy])
+                    readinput()
                 reverseplayerstats()
                 return variables.playerpossition
             else:
@@ -76,11 +89,6 @@ def startfight(enemy):
             return variables.playerlastpossition
         else:
             textlines[housedimentions[0] - 2] = playerinput + " is not a valid option."
-
-def displayenemy(enemy):
-
-    return
-
 
 
 # main fight cycle
@@ -113,8 +121,8 @@ def fightmain(enemy):
 
 def enemyattack(enemy):
     attack = random.choice(enemies[enemy][1])
-    variables.playerstats["hp"] = variables.playerstats["hp"] - enemyattacks[attack][0] * enemies[enemy][0][1]
-    displaymessage("damage", attack, enemy, enemyattacks[attack][0] * enemies[enemy][0][1])
+    variables.playerstats["hp"] = variables.playerstats["hp"] - (enemyattacks[attack][0] * enemies[enemy][0][1] - playerstats["def"])
+    displaymessage("damage", attack, enemy, enemyattacks[attack][0] * enemies[enemy][0][1] - playerstats["def"])
     return
 
 
@@ -256,6 +264,6 @@ def runmenu(enemy):
 
 # damage the enemy by multiplying the base damage of the player with the attack multiplier
 def damageenemy(enemy, attack):
-    enemies[enemy][0][0] = enemies[enemy][0][0] - playerstats[attacks[attack][0]] * attacks[attack][1]
+    enemies[enemy][0][0] = enemies[enemy][0][0] - (playerstats[attacks[attack][0]] * attacks[attack][1])
     displaymessage("attack", attack, enemy, playerstats[attacks[attack][0]] * attacks[attack][1])
     return

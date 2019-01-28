@@ -1,6 +1,8 @@
 from fighting import *
+from random import randint
 import variables
 import map
+import fighting
 
 
 itemlist = {"wood sword"      :["dmg",2],
@@ -11,14 +13,15 @@ itemlist = {"wood sword"      :["dmg",2],
              "shield"         :["def",7],
              "master sword"   :["dmg",15],
              "ability scroll" :["exp",1],
+             "potion"         :["exp",1]
              }
 
 
 # main menu
 def choseoption():
+    textlines[1] = "player possition:   " + variables.playerpossition
     # activates the fighting menu if there is an enemie in that room(room info table) and if that enemie is not dead
     if rooms[variables.playerpossition][0][0] != "" and enemies[rooms[variables.playerpossition][0][0]][0][0] > 0:
-
         return startfight(rooms[variables.playerpossition][0][0])
     textlines[11] = "you can do these:"
     textlines[12] = " * " + rooms[variables.playerpossition][3][0]
@@ -111,9 +114,21 @@ def lootmenu():
     map.rooms[variables.playerpossition][3][1] = ""
     if item == "ability scroll":
         addability("frenzy")
+    elif item == "potion":
+        addpotion()
     else:
         additem(item)
-    print(item)
+    return
+
+
+def addpotion():
+    fighting.potionlist["hp potion"][0] = fighting.potionlist["hp potion"][0] + randint(0, 3)
+    fighting.potionlist["dmg potion"][0] = fighting.potionlist["dmg potion"][0] + randint(0, 1)
+    fighting.potionlist["mag potion"][0] = fighting.potionlist["mag potion"][0] + randint(0, 1)
+    fighting.potionlist["def potion"][0] = fighting.potionlist["def potion"][0] + randint(0, 1)
+    textlines[housedimentions[0] - 1] = "You fond some potion that can be used in battle."
+    printscreen(houselines)
+    readinput()
     return
 
 
@@ -123,6 +138,7 @@ def additem(item):
     textlines[housedimentions[0] - 1] = "You fond a " + item + ", your " + itemlist[item][0] + " increased by " + str(itemlist[item][1]) + ". Press enter to continue."
     printscreen(houselines)
     readinput()
+    return
 
 
 def addability(ability):

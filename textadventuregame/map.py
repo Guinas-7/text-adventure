@@ -23,13 +23,13 @@ enemylines = {"spider1":[''' ''', ''' ''', ''' ''', ''' ''', '''           ____ 
 # Layout - [enemies],[coordinates of 2 corners],[connections to other rooms],[available options],[items]
 rooms = {"r1":  [[""]       , [[0  * charratio, 8 ], [3  * charratio, 16]], [""   , "h1" , ""   , ""   ], ["move", "loot", "cheats", "extra"], ["wood sword"]    ],
          "r2":  [[""]       , [[4  * charratio, 12], [6  * charratio, 14]], ["h1" , ""   , ""   , ""   ], ["move", "loot", "cheats", "extra"], ["staff"]         ],
-         "r3":  [[""]       , [[4  * charratio, 9 ], [6  * charratio, 11]], [""   , ""   , "h1" , ""   ], ["move", "loot", "cheats", "extra"], [""]              ],
+         "r3":  [[""]       , [[4  * charratio, 9 ], [6  * charratio, 11]], [""   , ""   , "h1" , ""   ], ["move", "loot", "cheats", "extra"], ["potion"]        ],
          "r4":  [["spider1"], [[7  * charratio, 10], [10 * charratio, 13]], ["h2" , ""   , "r8" , "h1" ], ["move", ""    , "cheats", "extra"], [""]              ],
          "r5":  [[""]       , [[9  * charratio, 5 ], [12 * charratio, 9 ]], [""   , ""   , ""   , "h2" ], ["move", "loot", "cheats", "extra"], ["shoe"]          ],
          "r6":  [["blob1"]  , [[6  * charratio, 3 ], [8  * charratio, 8 ]], ["r7" , "h2" , ""   , ""   ], ["move", ""    , "cheats", "extra"], [""]              ],
          "r7":  [[""]       , [[7  * charratio, 1 ], [10 * charratio, 3 ]], [""   , ""   , "r6" , ""   ], ["move", "loot", "cheats", "extra"], ["chestplate"]    ],
-         "r8":  [[""]       , [[9  * charratio, 13], [11 * charratio, 17]], ["r4" , ""   , "r9" , ""   ], ["move", "loot", "cheats", "extra"], [""]              ],
-         "r9":  [[""]       , [[10 * charratio, 17], [12 * charratio, 19]], ["r8" , "h4" , "r10", ""   ], ["move", "", "cheats", "extra"], [""]              ],
+         "r8":  [[""]       , [[9  * charratio, 13], [11 * charratio, 17]], ["r4" , ""   , "r9" , ""   ], ["move", "loot", "cheats", "extra"], ["potion"]        ],
+         "r9":  [[""]       , [[10 * charratio, 17], [12 * charratio, 19]], ["r8" , "h4" , "r10", ""   ], ["move", ""    , "cheats", "extra"], [""]              ],
          "r10": [["zombie1"], [[6  * charratio, 19], [11 * charratio, 24]], ["r9" , ""   , ""   , "r11"], ["move", ""    , "cheats", "extra"], [""]              ],
          "r11": [[""]       , [[1  * charratio, 17], [6  * charratio, 20]], [""   , "r10", "h3" , ""   ], ["move", "loot", "cheats", "extra"], ["iron sword"]    ],
          "r12": [["plant1"] , [[2  * charratio, 22], [4  * charratio, 24]], ["h3" , ""   , ""   , ""   ], ["move", ""    , "cheats", "extra"], [""]              ],
@@ -38,7 +38,7 @@ rooms = {"r1":  [[""]       , [[0  * charratio, 8 ], [3  * charratio, 16]], ["" 
          "r15": [[""]       , [[14 * charratio, 8 ], [18 * charratio, 13]], ["h6" , "h7" , "h5" , ""   ], ["move", "loot", "cheats", "extra"], ["master sword"]  ],
          "r16": [[""]       , [[18 * charratio, 6 ], [20 * charratio, 10]], ["r17", ""   , ""   , ""   ], ["move", "loot", "cheats", "extra"], ["ability scroll"]],
          "r17": [["blob2"]  , [[18 * charratio, 3 ], [21 * charratio, 6 ]], [""   , ""   , "r16", "h6" ], ["move", ""    , "cheats", "extra"], [""]              ],
-         "r18": [[""]       , [[14 * charratio, 2 ], [17 * charratio, 7 ]], [""   , "h6" , ""   , ""   ], ["move", "loot", "cheats", "extra"], [""]              ],
+         "r18": [[""]       , [[14 * charratio, 2 ], [17 * charratio, 7 ]], [""   , "h6" , ""   , ""   ], ["move", "loot", "cheats", "extra"], ["potion"]        ],
          "r19": [["dragon"] , [[21 * charratio, 9 ], [25 * charratio, 13]], [""   , "end", ""   , "h7" ], ["move", ""    , "cheats", "extra"], [""]              ],
          "h1":  [[""]       , [[3  * charratio, 11], [7  * charratio, 12]], ["r3" , "r4" , "r2" , "r1" ], ["move", ""    , "cheats", "extra"], [""]              ],
          "h2":  [[""]       , [[8  * charratio, 7 ], [9  * charratio, 10]], [""   , "r5" , "r4" , "r6" ], ["move", ""    , "cheats", "extra"], [""]              ],
@@ -118,6 +118,7 @@ def updateroom(room):
         display[iy+1, rooms[room][1][1][0], 0] = 1
         display[iy+1, rooms[room][1][1][0], 1] = 1
         iy += 1
+
 
 
 # transform table into string
