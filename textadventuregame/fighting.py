@@ -14,7 +14,7 @@ potionlist = {"hp potion" :[1, 650],
 enemies = {"spider1": [[20 , 10, 4 ], ["bite"          ,"web trow" ,"pass"        ]],
            "spider2": [[150, 25, 25], ["small spiders" ,"bite"     ,"pass"        ]],
            "blob1"  : [[35 , 13, 5 ], ["swallow"       ,"spit"     ,"pass"        ]],
-           "blob2"  : [[250, 35, 15], ["spit"          ,"swallow " ,"pass"        ]],
+           "blob2"  : [[250, 35, 15], ["spit"          ,"swallow"  ,"pass"        ]],
            "plant1" : [[65 , 17, 7 ], ["whip"          ,"squeeze"  ,"pass"        ]],
            "zombie1": [[90 , 20, 2 ], ["bite"          ,"scratch"  ,"pass"        ]],
            "dragon" : [[999, 50, 20], ["bite"          ,"fireball" ,"fire tornado"]]
