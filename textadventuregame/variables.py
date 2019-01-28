@@ -1,7 +1,8 @@
-startpossition = "h1"
+
+startpossition = "r4"
 
 playerpossition = ""
-playerlastpossition = ""
+playerlastpossition = "h1"
 
 spacebetweenscreens = 20
 charratio = 3
@@ -20,11 +21,12 @@ east = ["east", "right"]
 west = ["west", "left"]
 back = ["back", "previous", "cancel"]
 
-playerstats = {"hp" : 1000,
-               "dmg": 1,
-               "mag": 1,
-               "def": 1,
-               "spd": 1
+playerstats = {"hp"   : 1000,
+               "dmg"  : 7,
+               "mag"  : 5,
+               "def"  : 5,
+               "spd"  : 5,
+               "maxhp": 1000
                }
 
 

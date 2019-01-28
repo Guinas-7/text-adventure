@@ -1,5 +1,6 @@
 from variables import *
 import numpy as np
+import random
 
 
 # display uses a 3d matrix to store five values into each coordinate of the map which after is translated to a symbol

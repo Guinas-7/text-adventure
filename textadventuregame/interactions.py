@@ -1,15 +1,16 @@
 from fighting import *
 import variables
-inventory = []
 
 
 roomoptions = ["move", "explore", "manage", "extra"]
+
 
 
 # main menu
 def choseoption():
     # activates the fighting menu if there is an enemie in that room(room info table) and if that enemie is not dead
     if rooms[variables.playerpossition][0][0] != "" and enemies[rooms[variables.playerpossition][0][0]][0][0] > 0:
+
         return startfight(rooms[variables.playerpossition][0][0])
     textlines[11] = "you can do all of these:"
     textlines[12] = " * " + rooms[variables.playerpossition][3][0]
