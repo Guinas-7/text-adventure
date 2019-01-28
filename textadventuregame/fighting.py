@@ -60,22 +60,19 @@ def startfight(enemy):
         displayenemystats(enemy)
         displayenemy(enemy)
         textlines[housedimentions[0] - 1] = "Do you want to start a fight with " + enemy + "?"
-        printscreen(enemylines)
+        printscreen(enemylines[enemy])
         playerinput = readinput()
         if playerinput in positiveanswer:
             saveplayerstats()
             clearquestion()
             if fightmain(enemy):
                 reverseplayerstats()
-                returntomap()
                 return variables.playerpossition
             else:
                 reverseplayerstats()
-                returntomap()
                 return variables.playerlastpossition
         elif playerinput in negativeanswer:
             clearquestion()
-            returntomap()
             return variables.playerlastpossition
         else:
             textlines[housedimentions[0] - 2] = playerinput + " is not a valid option."
@@ -102,12 +99,12 @@ def fightmain(enemy):
                 displayenemystats(enemy)
                 if enemies[enemy][0][0] > 0:
                     textlines[housedimentions[0] - 1] = "Press enter to continue."
-                    printscreen(enemylines)
+                    printscreen(enemylines[enemy])
                     readinput()
                     enemyattack(enemy)
                 else:
                     textlines[housedimentions[0] - 1] = "you killed " + enemy + ". Press enter to continue."
-                    printscreen(enemylines)
+                    printscreen(enemylines[enemy])
                     readinput()
                 updateplayerstats()
             else:
@@ -152,7 +149,7 @@ def fightoptionsmenu(enemy):
     while True:
         clearsecondaryfightmenu()
         textlines[housedimentions[0] - 1] = "What do you want to do?"
-        printscreen(enemylines)
+        printscreen(enemylines[enemy])
         playerinput = readinput()
         if playerinput == "attack":
             clearquestion()
@@ -160,7 +157,7 @@ def fightoptionsmenu(enemy):
             return True
         elif playerinput == "item":
             clearquestion()
-            if itemmenu():
+            if itemmenu(enemy):
                 return True
         elif playerinput == "run":
             clearquestion()
@@ -173,14 +170,14 @@ def fightoptionsmenu(enemy):
             textlines[housedimentions[0] - 2] = playerinput + " is not on the menu"
 
 
-def itemmenu():
+def itemmenu(enemy):
     global potionlist
     textlines[19] = "Items:"
     textlines[20] = "* HP Potion   " + str(potionlist["hp potion"][0])  + "  * DMG Potion  " + str(potionlist["dmg potion"][0])
     textlines[21] = "* MAG Potion  " + str(potionlist["mag potion"][0]) + "  * DEF potion  " + str(potionlist["def potion"][0])
     while True:
         textlines[housedimentions[0] - 1] = "Which item do you want to use?"
-        printscreen(enemylines)
+        printscreen(enemylines[enemy])
         playerinput = readinput()
         if playerinput in("hp", "hp potion"):
             if potionlist["hp potion"][0] <= 0:
@@ -228,7 +225,7 @@ def atackmenu(enemy):
     textlines[21] = "* " + playerattacks[1] + "".join([" " for x in range(1, 20-len(playerattacks[1]))]) + "* " + playerattacks[3]
     while True:
         textlines[housedimentions[0] - 1] = "Choose an attack."
-        printscreen(enemylines)
+        printscreen(enemylines[enemy])
         playerinput = readinput()
         if playerinput == playerattacks[0]:
             clearquestion()
