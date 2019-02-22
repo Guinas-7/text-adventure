@@ -24,6 +24,7 @@ def choseoption():
     if rooms[variables.playerpossition][0][0] != "" and enemies[rooms[variables.playerpossition][0][0]][0][0] > 0:
         return startfight(rooms[variables.playerpossition][0][0])
     textlines[11] = "you can do these:"
+    # missing if option is there to show or not the "*"
     textlines[12] = " * " + rooms[variables.playerpossition][3][0]
     textlines[13] = " * " + rooms[variables.playerpossition][3][1]
     textlines[14] = " * " + rooms[variables.playerpossition][3][2]
